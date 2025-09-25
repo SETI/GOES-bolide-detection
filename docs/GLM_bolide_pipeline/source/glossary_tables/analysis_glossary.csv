@@ -1,0 +1,14 @@
+﻿Terms,Definition
+bolide analysis pipeline,The code performing follow-up analyses of detected bolide candidates.
+L0,"The GLM Level-0 data product, transmitted directly from GOES."
+L2,"The GLM Level-2 data product, delivered following ground processing of the L0 product."
+pixel event,A GLM pixel measurement whose amplitude exceeds :math:`\sim4\sigma` above the pixel's current background level.
+impact event,The physical impact of an object with Earth's atmosphere.
+detection,A set of groups in L2 data identified by the ATAP bolide detection pipeline.
+detected event,A GLM pixel event whose assocaited group is included in one or more ATAP detections.
+extracted event,"A GLM pixel event identified by the bolide analysis as belonging to the set of pixel events triggered by the hypothetical bolide. Typically, this will include most detected events and may include a significant number of additional pixel events."
+active pixel,"Any pixel that recorded at least one event during the specified time window is deemed ""active."""
+maximum energy pixel,The pixel recording the most total energy of all active pixels. Typically the energy referred to will be the ATAP pixel impact energy defined below.
+bounds,"The upper and lower bounds of a quantity. This may refer to hard bounds or the 3𝜎 confidence interval, depending on context."
+,
+,

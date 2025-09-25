@@ -1,0 +1,1 @@
+../../code/GLM_detection/batch/run_bolide_aggregation.py

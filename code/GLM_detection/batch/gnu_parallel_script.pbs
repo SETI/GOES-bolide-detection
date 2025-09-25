@@ -1,0 +1,33 @@
+#!/bin/sh
+
+############################################################################# 
+# This PBS script is to set up the NAS nodes to be used in the parallel processing calling the gnu parallel command to
+# distribute the batch jobs.
+#
+# We need to pass a filename listing all the directories to be processed by batch_elemental_script.
+# The qsub command does not appear to allow passing arguments to shell scripts like this, so we need to pass the
+# filename via an environment variable. Before calling this qsub script set the environment variable 'ATAP_PROC_FILE'
+# to the name of the file containing a list of directories to be processed with batch_elemental_script.sh.
+#
+# We also need the environment variable ATAP_REPO_ROOT so PBS knows where the batch script is located.
+#
+# Each directory in ATAP_PROC_FILE is processed using the GNU parallel tool.
+# 
+# Nominal:
+#
+# -W group_list=s1488
+# -l select=40:ncpus=28:model=bro
+# -l walltime=4:00:00
+# -q normal
+#
+# -l site=static_broadwell
+############################################################################# 
+
+#PBS -W group_list=s1488
+#PBS -l select=100:ncpus=128:model=rom_ait
+#PBS -l walltime=8:00:00
+#PBS -l site=needed=/home5+/nobackupp27+/nobackupp17
+#PBS -q normal
+
+parallel -j 1 -u --sshloginfile $PBS_NODEFILE -a $ATAP_PROC_FILE "sh ${ATAP_REPO_ROOT}/system/bin/batch_elemental_script.sh"
+

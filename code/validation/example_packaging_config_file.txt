@@ -1,0 +1,49 @@
+# Tests the bolide pipeline packager 
+
+#------------------------------------------------------------------------------
+# detectionRootDir (as string) - the parent directory of daily directories
+# containing the pipeline bolide detections. The subdirectories should years.
+#------------------------------------------------------------------------------
+detectionRootDir = ../data/detections/G16
+
+#------------------------------------------------------------------------------
+# cutoutRootDir (as string) - The parent directory of daily directories
+# containing the cutout figures. The subdirectories should years.
+# The cutouts are not divided among satellite, they are all int eh same directory
+#------------------------------------------------------------------------------
+cutoutRootDir = ../data/cutouts
+
+# -----------------------------------------------------------------------------
+# outputDir (as string) - The directory in which to write the output file(s).
+# If '' then use detectionRootDir
+# -----------------------------------------------------------------------------
+outputDir = ../output/G16
+#outputDir = ''
+
+# -----------------------------------------------------------------------------
+# forceReprocess - If true, all files are reprocessed irrespective of the 
+# processing history.
+# WARNING: THIS WILL DELETE ALL PACKAGED FILES CURRENTLY LOCATED AT <outputDir>
+# It will NOT delete the bolide detection files.
+# -----------------------------------------------------------------------------
+forceReprocess = True
+
+# -----------------------------------------------------------------------------
+# creatSymlinks - If true, then instead of copying over the .nc files symbolic 
+# links are created pointing to each .nc file.
+# -----------------------------------------------------------------------------
+createSymlinks = True
+
+# -----------------------------------------------------------------------------
+# startDate - Gives the starting date for processing the data. Do not process any 
+# data before this data. Format: yyyy-mm-dd
+# -----------------------------------------------------------------------------
+#startDate = 2021-08-28
+startDate = ''
+
+# -----------------------------------------------------------------------------
+# endDate - Gives the stoping date for processing the data. Do not process any 
+# data after this data. Format: yyyy-mm-dd
+# -----------------------------------------------------------------------------
+#endDate = 2021-08-28
+endDate = ''

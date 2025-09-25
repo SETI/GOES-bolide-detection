@@ -1,0 +1,189 @@
+#==============================================================================
+#
+# Configuration file for use with detect_bolides.py
+#
+# Usage notes:
+#
+# - Default values will be used for any missing parameters.
+#   See for defaults: code/GLM_detection/bolide_detection/bolide_io.py
+# - Path names may be terminated with or without a '/' character.
+# - Comments starting with '#' may appear anywhere.
+# - Whitespace is removed during processing. 
+# 
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# Whether to be verbose and print a ton of diagnostic information
+#------------------------------------------------------------------------------
+verbosity = False
+
+#------------------------------------------------------------------------------
+# data path (as string) - the location of the *.nc files 
+# Overridden by the value in the top_level config file
+#------------------------------------------------------------------------------
+data_path = 
+
+#------------------------------------------------------------------------------
+# output_path (as string) - where to put the results. If the directory doesn't 
+# exist it will be created.
+# Overridden by the value in the top_level config file
+#------------------------------------------------------------------------------
+output_path = 
+
+#------------------------------------------------------------------------------
+# generate_plots (True) - If true, plots and corresponding symbolic links to
+# .nc files are generated and placed in the output directory specified by
+# output_path.
+#------------------------------------------------------------------------------
+generatePlots = True
+
+#------------------------------------------------------------------------------
+# copyNetCDFFiles -- [bool] If True then copy individual netCDF files for each 
+# detection to the outputDir. This will typically be 3 files (the main file and 
+# the 20-second files on either side).
+#------------------------------------------------------------------------------
+copyNetCDFFiles = False
+
+#------------------------------------------------------------------------------
+# createSymlinks -- [bool] If True then create a symlink to each .nc file associated with a detection.
+# If False then make a copy of the .nc file.
+#------------------------------------------------------------------------------
+createSymlinks = False
+
+#------------------------------------------------------------------------------
+# file start index (default = 0) - this can be used to distribute the files in 
+# the data path. If there are N files in the directory and we have M processes 
+# and the current process is i, each process can start at the i*N/M th file. 
+#------------------------------------------------------------------------------
+start_index = 0                                          
+#start_index = 1500                                          
+
+#------------------------------------------------------------------------------
+# file end index (default = -1) - as described above... the current process can 
+# finish at the (i+1)*N/M th file. 
+#------------------------------------------------------------------------------
+end_index = -1
+#end_index = 1000
+
+#------------------------------------------------------------------------------
+# n_cores (default = 1) - number of processors to be used in multiprocessing
+#------------------------------------------------------------------------------
+n_cores = 20
+
+#------------------------------------------------------------------------------
+# min_GB_post_processing (default = 15.0) 
+# min_GB_cutout_tool (default = 15.0) 
+# The minimum about of memory in GB per post-processing and cutout tool thread. 
+# This is to ensure out of memory doesnot occur if too many jobs run in parallel.
+#------------------------------------------------------------------------------
+min_GB_post_processing = 15.0
+min_GB_cutout_tool = 15.0 
+
+#------------------------------------------------------------------------------
+# Trained classifier to use.
+# Empty string or [] means do not use, use the filters or ground truth instead.
+# classifier_threshold gives the detection threshold for the predict_proba 
+# method of the classifier 
+# max_num_detections is the maximum number of detections to save
+# {-1 => save all}
+#------------------------------------------------------------------------------
+trained_classifier_path = /home/bohr/data/ATAP/GLM_bolide_detector/training/20210120_test_ZODB/20210215_test_ZODB_forest_classifier_G17_one_job.p
+classifier_threshold = 0.1
+max_num_detections = 100
+
+#------------------------------------------------------------------------------
+# ground_truth_path (default = '') - Use the ground truth located here to 
+# determine if a cluster is a detection. Generate the ground truth data with
+# bolide_dispositions.pull_dispositions_from_website.
+# Empty string means do not use, use the filters instead.
+# rejectsToSaveFrac gives the fraction of rejects to save in bolide_rejections.p
+#------------------------------------------------------------------------------
+#ground_truth_path = /home/bohr/data/ATAP/neo-bolides_website/data_pull/bolidesFromWebsite_20210311.p
+rejectsToSaveFrac = 0.1
+
+#------------------------------------------------------------------------------
+# spice_kernel_path - gives the path to the spice kernels needed to compute the 
+# glint point.
+#------------------------------------------------------------------------------
+spice_kernel_path = /home/bohr/data/ATAP/GLM_bolide_detector/glints/spice_kernels
+
+#------------------------------------------------------------------------------
+# latLon2Pix converts the L2 latitude and longitude to raw detector pixels
+# Lookup tables have been created to perform the conversion
+# pixel_boundary_plotting_enabled determines if we plot the pixel boundaries on the detection figure (this is really slow!)
+#   latLon2Pix_table_path           -- [str] Path to the lookup table file.
+#   latLon2Pix_table_path_inverted  -- [str] Path to the lookup table file for the inverted yaw orientation
+#                                           Only relevent for G17.
+#------------------------------------------------------------------------------
+latLon2Pix_table_path = /home/bohr/data/ATAP/GLM/navigation_lookup_tables/G17_nav_LUT.csv
+latLon2Pix_table_path_inverted = /home/bohr/data/ATAP/GLM/navigation_lookup_tables/G17_nav_LUT_inverted.csv
+pixel_boundary_plotting_enabled = False
+
+#------------------------------------------------------------------------------
+# min_num_groups (default = 25) - The minimum group count a cluster should
+#  have to be considered a bolide candidate. Range: [0:inf]
+#------------------------------------------------------------------------------
+min_num_groups = 25
+
+#------------------------------------------------------------------------------
+# Detecting bolides in other satellite -- Gives the amount to expand a box about each detection when finding groups in
+# the other satellite. The expansion is plus and minus by each amount.
+#------------------------------------------------------------------------------
+otherSatelliteLatExpansionDegrees   = 0.2
+otherSatelliteLonExpansionDegrees   = 3.0
+otherSatelliteTimeExpansionSeconds  = 0.1
+
+#------------------------------------------------------------------------------
+#If input_config.stereoDetectionOnlyMode is True then the two parameters minAltToGenerateFigureKm and
+#maxAltToGenerateFigureKm to check what detections are in the altitude region and are stereo. Only those are kept
+#in bolideDetectionList and so figures and the database entries are generated for only these events. 
+#
+#If input_config.stereoDetectionOnlyMode is False then only minAltToGenerateFigureKm is used to determein if
+#stereo figures are generated. There are not changes to bolideDetectionList. (This is the standard pipeline
+#configuration.)
+#------------------------------------------------------------------------------
+minAltToGenerateFigureKm = 20
+
+#------------------------------------------------------------------------------
+# Hot Spots feature -- This gives the lat and lon location of each hot spot to avoid
+# Also provides the fitted deemphasis cylinders radius and alpha parameter
+# Provide a list of floats for each field below, all lists should be the same length.
+#------------------------------------------------------------------------------
+lon_peaks = [-101.33773091107783, -173.0882249996217]
+lat_peaks = [-9.43513974168564, 9.447575964317611]
+deemph_radius = [18.85560505, 18.75486408]
+deemph_alpha = [0.60129699, 0.790323]
+
+#------------------------------------------------------------------------------
+# Post-Processesing
+#------------------------------------------------------------------------------
+post_process_enabled = True
+post_process_config_file = ./post_process_config.txt
+
+#------------------------------------------------------------------------------
+# Cutout figure configuration
+#------------------------------------------------------------------------------
+cutout_enabled = True
+cutout_annotations = True
+cutout_G16ABICDIR = /mnt/data/bohr/ATAP/GLM/sample_data/ABI/G16/RadC
+cutout_G16ABIFDIR = /mnt/data/bohr/ATAP/GLM/sample_data/ABI/G16/RadF
+cutout_G17ABICDIR = /mnt/data/bohr/ATAP/GLM/sample_data/ABI/G17/RadC
+cutout_G17ABIFDIR = /mnt/data/bohr/ATAP/GLM/sample_data/ABI/G17/RadF
+cutout_G18ABICDIR = /mnt/data/bohr/ATAP/GLM/sample_data/ABI/G18/RadC
+cutout_G18ABIFDIR = /mnt/data/bohr/ATAP/GLM/sample_data/ABI/G18/RadF
+cutout_coastlines_path = /home/bohr/data/ATAP/GLM/ABI_cutout_coastlines/gshhs_h.b
+cutout_n_cores = None
+cutout_plot_seperate_figures = False
+cutout_plot_glm_circle_size = 2.5
+cutout_generate_multi_band_data = False
+cutout_bands_to_read = (1,2,3,7,11,13)
+
+#------------------------------------------------------------------------------
+# Packager and output path (str)
+# The directory in which to write the output file(s).
+# If None thne use reportOutputDir form the tope level config file
+# If '' then use detection outputDir
+# -----------------------------------------------------------------------------
+reportEnabled = False
+reportCopyIndivFiles = False
+report_create_symlinks = True

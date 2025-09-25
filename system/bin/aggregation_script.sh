@@ -1,0 +1,1 @@
+../../code/GLM_detection/batch/aggregation_script.sh

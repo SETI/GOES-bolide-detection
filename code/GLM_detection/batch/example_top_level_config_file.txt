@@ -1,0 +1,119 @@
+#==============================================================================
+#
+# Configuration file for use with run_glm_pipeline_batch.py
+#
+# Usage notes:
+#
+# - Default values will be used for any missing parameters.
+#   See for defaults: code/GLM_detection/batch/run_glm_pipeline_batch.py
+# - Path names may be terminated with or without a '/' character.
+# - Comments starting with '#' may appear anywhere.
+# - Whitespace is removed during processing.
+# - The following parameters are overridden in the elemental configuration file:
+#
+#       'data_path' is overridden by the value of inputRootDir specified here
+#       'output_path' is overridden by the value of outputDir specified here
+#
+#==============================================================================
+
+#------------------------------------------------------------------------------
+# inputRootDir (as string) - the parent directory of daily directories
+# containing the *.nc files or daily *.tgz bundles.
+# inputRootDirL0 (str) contains the Level 0 data file
+#------------------------------------------------------------------------------
+inputRootDir = ./data/G16
+inputRootDirL0 = ./data/G16/L0
+
+#------------------------------------------------------------------------------
+# [string] The parent directory containing the netCDF files for the other satellite.
+# This is used to copy over and analyze the data in the other instrument in the stereo region.
+#------------------------------------------------------------------------------
+otherSatelliteRootDir = ./data/G17
+
+#------------------------------------------------------------------------------
+# outputDir (as string) - The directory in which to write the output file(s).
+# If running in batch mode (multiProcessEnabled = True) then the full path is needed.
+#------------------------------------------------------------------------------
+outputDir = ./output/G16
+
+#------------------------------------------------------------------------------
+# detectionType : str
+#   What are we detecting in the GLM data?
+#   (e.g. 'bolides', 'gigantic_jets')
+#------------------------------------------------------------------------------
+detectionType = bolides
+
+#------------------------------------------------------------------------------
+# elementalConfigFile (as string) - A configuration file for daily elemental job.
+#------------------------------------------------------------------------------
+elementalConfigFile = ./detect_bolides_config_file_G16.txt
+
+#------------------------------------------------------------------------------
+# processingHistoryBaseName
+#
+# Base name is extended with '.txt'
+#------------------------------------------------------------------------------
+processingHistoryBaseName = processing_history
+
+#------------------------------------------------------------------------------
+# forceReprocess - If true, all files are reprocessed irrespective of the 
+# processing history.
+# WARNING: THIS WILL DELETE ALL FILES CURRENTLY LOCATED AT <outputDir>
+#------------------------------------------------------------------------------
+forceReprocess = True
+
+#------------------------------------------------------------------------------
+# multiProcessEnabled - If true, then use GNU parallel to distribute the processing
+#------------------------------------------------------------------------------
+multiProcessEnabled = False
+
+#------------------------------------------------------------------------------
+# n_cores_aggregation - Number of multiprocessing cores to use for the aggregation step
+#------------------------------------------------------------------------------
+n_cores_aggregation = 20
+
+#------------------------------------------------------------------------------
+# deleteDailyDirs - If True, the delete all the daily output directories.
+# The data is stored in the run aggregation files, which are not deleted.
+# deleteDailyNetCdfFiles - If True, all daily .nc files are also deleted.
+# The netCDF files are temporarily copied over during processing.
+#------------------------------------------------------------------------------
+deleteDailyDirs = False
+deleteDailyNetCdfFiles = True
+
+#------------------------------------------------------------------------------
+# deleteDailyDatabases - If True, then delete all the daily database files.
+# The data is stored in the aggregation database, so the daily databases are not 
+# needed and take up a lot of storage space.
+#------------------------------------------------------------------------------
+deleteDailyDatabases = True
+
+#------------------------------------------------------------------------------
+# doNotProcessCurrentDay - If True then do not process any data from the current day.
+# This is used during daily processing where we do not want to process the partial day available if using an active data
+# stream (such as geonex).
+#------------------------------------------------------------------------------
+doNotProcessCurrentDay = True
+
+#------------------------------------------------------------------------------
+# delayNDaysForL0Data - (int) Do not process the daily data if the Level 0
+# data is not present. But only check up to this number of days back in time. This
+# means for all days older than this many N days old, process the data
+# irrespective of if the Level 0 data is available
+#------------------------------------------------------------------------------
+delayNDaysForL0Data = 10
+
+#------------------------------------------------------------------------------
+# startDate - Gives the starting date for processing the data. Do not process any 
+# data before this data. Format: yyyy-mm-dd
+#------------------------------------------------------------------------------
+#startDate = 2018-06-21
+startDate = ''
+
+#------------------------------------------------------------------------------
+# endDate - Gives the stoping date for processing the data. Do not process any 
+# data after this data. Format: yyyy-mm-dd
+#------------------------------------------------------------------------------
+#endDate = 2018-07-23
+endDate = ''
+

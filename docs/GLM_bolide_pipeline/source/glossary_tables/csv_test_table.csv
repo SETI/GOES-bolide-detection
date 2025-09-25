@@ -1,0 +1,73 @@
+﻿ATAP Bolide Detection,,,
+,,,
+Terms,,,Definition
+Event Clusters ,,,"These are the groups of GLM data that are created by the first stage of the detection algorithm (""Clusters"" for short)."
+Detection,,,"These are the subset of event clusters that the detection algorithm identifies as possible bolides (""Triggers"" for short)"
+Bolide Candidate ,,,"the subset of detection that a person or machine has evaluated and promoted to the candidate stage (""Candidates"" for short)."
+Confirmed Bolide,,,"The subset of candidate bolides that were also detected by another system, or otherwise confirmed beyond reasonable doubt (Maybe someday we’ll figure out a way to confirm them without an additional detection, but it seems prudent to start with a distinction until we formalize our process)(""Confirmed"" for short)"
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+,,,
+ATAP Bolide Analysis,,,
+These are the terms and quantities that show up on figures and in general discussions about the ATAP bolide analysis results.,,,
+,,,
+Terms,,,Definition
+bolide analysis pipeline,,,The code performing follow-up analyses to detected bolide candidates.
+L0,,,"The GLM Level-0 data product, transmitted directly from GOES."
+L2,,,"The GLM Level-2 data product, delivered following ground processing of the L0 product."
+pixel event,,,A GLM pixel measurement whose amplitude exceeds ~4𝜎 above the pixel's current background level.
+impact event,,,The physical impact of an object with Earth's atmosphere.
+detection,,,A set of groups in L2 data identified by the ATAP bolide detection pipeline.
+detected event,,,A GLM pixel event whose assocaited group is included in one or more ATAP detections.
+extracted event,,,"A GLM pixel event identified by the bolide analysis as belonging to the set of pixel events triggered by the hypothetical bolide. Typically, this will include most detected events and may include a significant number of additional pixel events."
+active pixel,,,"Any pixel that recorded event during the specified time window is deemed ""active."""
+maximum energy pixel,,,The pixel recording the most total energy of all active pixels. Typically the energy referred to will be the ATAP pixel impact energy defined below.
+bounds,,,"The upper and lower bounds of a quantity. This may refer to hard bounds or the 3𝜎 confidence interval, depending on context."
+,,,
+,,,
+,,,
+Quantity,Units,Symbol,Definition
+Onboard Quantities,,,
+GLM onboard event intensity,counts,e,The number of (14-bit) digital counts above the onboard background b. e is returned in L0 event data.
+GLM onboard background intensity,counts,b,"The 14-bit value of the onboard adaptive background estimate for the event in question. In cases where b cannot be reconstructed exactly, we determine its upper and lower bounds U(b) and L(b)."
+GLM onboard pixel value,counts,d = e + b,"The onboard 14-bit pixel value for the event in question. In cases where b cannot be reconstructed exactly, U(d) = U(b) + e and L(d) = L(b) + e."
+,,,
+GLM Data Products,,,
+GLM L0 background intensity,counts x 2^9,bMSB,The 5-bit background value returned with each L0 event.
+GLM L0 background image,counts,,"A 14-bit snapshot of the onboard background (b) values, acquired avery ~2 minutes."
+GLM L0 event intensity,counts,e,Same as onboard event intensity
+GLM L0 pixel X,integer,x,The integer pixel x-coordinate.The x-axis runs east to west in either yaw flip state.
+GLM L0 pixel Y,,y,The integer pixel y-coordinate.The y-axis runs north to south in either yaw flip state.
+,,,
+GLM L2 event energy,Joules,EL2,The event energy provided with the L2 data product.
+GLM L2 event latitude,degrees N,𝜑,The event latitude provided with the L2 data product.
+GLM L2 event longitude,degrees E,𝜃,The event longitude provided with the L2 data product.
+,,,
+GLM background calibration gain,Joules/count,Gbg,"The multiplicative factor that maps dark-subtracted onboard background intensity (14-bit) to Joules, provided in a table for each pixel at each 5-bit L0 background intensity (note that the background calibration gain values provided by Lockheed is in radiance units, which we convert to Joules/count)"
+GLM lightning calibration gain,Joules/count,Gline,"The multiplicative factor that maps L0 event intensity to Joules, provided in a table for each pixel at each 5-bit L0 background intensity."
+,,,
+,,,
+ATAP Pixel Quantities,,,
+ATAP pixel background intensity,counts,B,Bounding values of an onboard 14-bit pixel value associated with a GLM pixel event. Bounds are determined when exact reconstruction is not possible.
+ATAP pixel impact intensity,counts,I = d - B,Background-subtracted bounds of a reconstructed 14-bit pixel event
+ATAP pixel impact energy,Joules,E impact,"Radiant energy from the impact in the nominal passband and within the solid angle imaged by the pixel just before entering GLM's optics (i.e., before any transmission losses). "
+,,,
+ATAP Macro Quantities,,,
+ATAP light curve,Joules,𝛷(t),"For each frame, the estimated impact energy (i.e., the integrated spectral radiance before any transmission losses) with propagated uncertainties."
+ATAP ground track,,,"For each frame, the estimated latitude and longitude of the point corresponding to the image centroid. "
+ATAP observed intensity curve,counts,,The sum of ATAP pixel impact intensities in each frame
+ATAP observed energy curve,Joules,,The sum of ATAP pixel impact energies in each frame
+,,,
+Miscellaneous Quantities,,,
+Pixel noise,counts,𝜎,"The standard deviation of Gaussian pixel noise, derived from the table of RTEP detection thresholds."
+Continuum ratio,dimensionless,𝛼,The ratio of continuum to total radiant energy in the nominal GLM passband.
+upper bound of variable v,units of v,U(v),The maximum possible value of a bounded unknown v.
+lower bound of variable v,units of v,L(v),The minimum possible value of a bounded unknown v.
+3𝜎 upper bound of variable v,units of v,U( v ; 3𝜎),The upper bound of the 99.7% confidence interval.
+3𝜎 lower bound of variable v,units of v,L( v ; 3𝜎),The upper bound of the 99.7% confidence interval.
+,,,
+,,,

@@ -1,0 +1,45 @@
+#*************************************************************************************************************
+#*************************************************************************************************************
+# This is an example configuration file to run the quick pipeline. See the pipeline doculmentation on "Running the Quick
+# Pipeline for Rapid Results" for details.
+#*************************************************************************************************************
+#*************************************************************************************************************
+
+#*************************************************************************************************************
+# Specify the input netCDF files for both the detection satellite and the other satellite. 
+# [str or list of str] You can specify:
+# 1. An entire directory path
+# 2. A single NetCDF file
+# 3. A list of individual files.
+#*************************************************************************************************************
+inputFilePath = /mnt/data/bohr/ATAP/GLM/sample_data/GLM/G17/L2
+otherSatelliteFilePath = /mnt/data/bohr/ATAP/GLM/sample_data/GLM/G16/L2
+
+#*************************************************************************************************************
+# outputDir [str] - The directory in which to write the output file(s).
+#*************************************************************************************************************
+outputDir = ./output
+
+#*************************************************************************************************************
+# elementalConfigFile [string] - A configuration file for the elemental job.
+#*************************************************************************************************************
+elementalConfigFile = ./elemental_config_file_G17.txt
+
+#*************************************************************************************************************
+# detectionType : [str]
+#   What are we detecting in the GLM data?
+#   (e.g. 'bolides', 'gigantic_jets')
+#*************************************************************************************************************
+detectionType = bolides
+
+#*************************************************************************************************************
+# Spatiotemporal Box -- specifies a specific box to search for detection candidates. 
+# If any of these are set then the <classifier_threshold> parameter is set to 0.0.
+# Box limits that are not specified are set to their maximum or minimum values.
+#*************************************************************************************************************
+minDate = 2022-11-05T02:26:12 # in ISO format (DO NOT USE A SPACE BETWEEN THE DATE AND TIME)
+maxDate = 2022-11-05T02:26:13
+minLat = 40.0 # Float in degrees
+maxLat = 45.0
+minLon = -130.0
+maxLon = -120.0

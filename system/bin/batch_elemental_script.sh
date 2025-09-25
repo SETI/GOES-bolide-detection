@@ -1,0 +1,1 @@
+../../code/GLM_detection/batch/batch_elemental_script.sh

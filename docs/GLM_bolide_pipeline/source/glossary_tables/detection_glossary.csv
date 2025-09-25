@@ -1,0 +1,20 @@
+﻿Terms,Definition
+
+Clusters ,"The collection of GLM data groups that are created by the first clustering stage of the detection algorithm."
+
+Confidence Score,"The Machine Learning classifier score identifying a cluster as a bolide."
+
+Detection,"The subset of event clusters that the detection algorithm identifies as possible bolides, for example, above
+a classifier confidence score threshold (""Triggers"" for short)"
+
+Bolide Candidate ,"The subset of detections that a person or machine has evaluated and promoted to the candidate stage (""Candidates"" for short)."
+
+Confirmed Bolide,"The subset of candidate bolides that were also detected by another system, or otherwise confirmed
+beyond reasonable doubt (Maybe someday we’ll figure out a way to confirm them without an additional detection, but it
+seems prudent to start with a distinction until we formalize our process)(""Confirmed"" for short)"
+, 
+, 
+, 
+, 
+, 
+,

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+############################################################################# 
+# This PBS script is to set up the NAS node to run the final aggregation step.
+#
+# We need to pass a filename for the file containing the information to proces the aggregation step
+# The qsub command does not appear to allow passing arguments to shell scripts like this, so we need to pass the
+# filename via an environment variable. Before calling this qsub script set the environment variable 'ATAP_AGGRE_FILE'
+# to the name of the file containing the data.
+#
+# We also need the environment variable ATAP_REPO_ROOT so PBS knows where the batch script is located.
+#
+# The aggregator is a very fast process so only a single node for a short period of time is needed
+#
+############################################################################# 
+
+#PBS -W group_list=s1488
+#PBS -l select=1:ncpus=28:model=bro
+#PBS -l walltime=1:00:00
+#PBS -l site=needed=/home5+/nobackupp17
+#PBS -q normal
+
+sh ${ATAP_REPO_ROOT}/system/bin/aggregation_script.sh $ATAP_AGGRE_FILE
+
+
